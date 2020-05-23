@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const geocoder = require('../utils/geocoder');
 
 const TrainingcampSchema = new mongoose.Schema({
 	name: {
@@ -49,9 +50,8 @@ const TrainingcampSchema = new mongoose.Schema({
 		formattedAddress: String,
 		street: String,
 		city: String,
-		state: String,
-		zipcode: String,
-		country: String
+		country: String,
+		zipcode: String
 	},
 	careers: {
 		//Array of string
@@ -101,4 +101,25 @@ TrainingcampSchema.pre('save', function(next) {
 	this.slug = slugify(this.name, { lower: true });
 	next();
 });
+
+//- GeoCode & create location field
+TrainingcampSchema.pre('save', async function(next) {
+	const loc = await geocoder.geocode(this.address);
+	//GeoJson object
+	console.log(loc);
+
+	this.location = {
+		type: 'Point',
+		coordinate: [ loc[0].latitude, loc[0].longitude ],
+		formattedAddress: loc[0].formattedAddress,
+		country: loc[0].countryCode,
+		city: loc[0].city,
+		street: loc[0].streetName,
+		zipcode: loc[0].zipcode
+	};
+	// throw away  the address
+	this.address = undefined;
+	next();
+});
+
 module.exports = mongoose.model('Trainingcamp', TrainingcampSchema);
