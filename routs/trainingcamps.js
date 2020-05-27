@@ -8,6 +8,8 @@ const {
 	getTrainingcampInRadius,
 	trainingcampPhotoUpload
 } = require('../controllers/trainingcamps');
+const Trainingcamp = require('../models/Trainingcamp');
+const filteredResults = require('../middleware/filteredResults');
 
 // include other resourse router
 const programRouter = require('./programmes');
@@ -20,7 +22,7 @@ router.use('/:trainingcampId/programmes', programRouter);
 
 router.route('/:id/photo').put(trainingcampPhotoUpload);
 
-router.route('/').get(getTrainingcamps).post(createTrainingcamp);
+router.route('/').get(filteredResults(Trainingcamp, 'programmes'), getTrainingcamps).post(createTrainingcamp);
 
 router.route('/:id').get(getTrainingcamp).put(updateTrainingcamp).delete(deleteTrainingcamp);
 

@@ -7,24 +7,17 @@ const Trainingcamp = require('../models/Trainingcamp');
 // @route  GET /api/v1/trainingcamps/:trainingcampId/programmes
 // @access public
 exports.getProgrammes = asyncHandler(async (req, res, next) => {
-	let query;
-
 	if (req.params.trainingcampId) {
-		query = Program.find({
-			trainingcamp: req.params.trainingcampId
+		const courses = await Program.find({ trainingcamp: req.params.trainingcampId });
+
+		return res.status(200).json({
+			success: true,
+			count: courses.length,
+			data: courses
 		});
 	} else {
-		query = Program.find().populate({
-			path: 'trainingcamp',
-			select: 'name description'
-		});
+		return res.status(200).json(res.filteredResults);
 	}
-	const programmes = await query;
-	res.status(200).json({
-		success: true,
-		count: programmes.length,
-		data: programmes
-	});
 });
 
 // @desc   Get single program
