@@ -33,9 +33,42 @@ const ProgramSchema = new mongoose.Schema({
 	},
 	trainingcamp: {
 		type: mongoose.Schema.ObjectId,
-		ref: 'TrainingCamp',
+		ref: 'Trainingcamp',
 		required: true
 	}
+});
+
+// static method to fet average cost tuitions
+ProgramSchema.statics.getAverageCost = async function(trainingcampId) {
+	//aggergation to get an object with id of the training camp & the average cost
+	const obj = await this.aggregate([
+		{
+			$match: { trainingcamp: trainingcampId }
+		},
+		{
+			$group: {
+				_id: '$trainingcamp',
+				averageCost: { $avg: '$tuition' }
+			}
+		}
+	]);
+	try {
+		await this.model('Trainingcamp').findByIdAndUpdate(trainingcampId, {
+			averageCost: Math.ceil(obj[0].averageCost / 10) * 10
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// Call getAverageCost after save
+ProgramSchema.post('save', function() {
+	this.constructor.getAverageCost(this.trainingcamp);
+});
+
+// Call getAverageCost before remove save
+ProgramSchema.pre('save', function() {
+	this.constructor.getAverageCost(this.trainingcamp);
 });
 
 module.exports = mongoose.model('Program', ProgramSchema);
