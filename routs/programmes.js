@@ -3,7 +3,7 @@ const { getProgrammes, getProgram, addProgram, updateProgram, deleteProgram } = 
 const Program = require('../models/Program');
 const filteredResults = require('../middleware/filteredResults');
 const router = express.Router({ mergeParams: true });
-
+const { protect, authorize } = require('../middleware/auth');
 // router.route('/radius/:zipcode/:distance').get(getTrainingcampInRadius);
 
 router
@@ -15,6 +15,12 @@ router
 		}),
 		getProgrammes
 	)
-	.post(addProgram);
-router.route('/:id').get(getProgram).put(updateProgram).delete(deleteProgram);
+	.post(protect, authorize('trainer', 'admin'), addProgram);
+
+router
+	.route('/:id')
+	.get(getProgram)
+	.put(protect, authorize('trainer', 'admin'), updateProgram)
+	.delete(protect, authorize('trainer', 'admin'), deleteProgram);
+
 module.exports = router;
