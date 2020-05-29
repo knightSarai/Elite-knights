@@ -18,6 +18,7 @@ connectDB();
 const trainingcamps = require('./routs/trainingcamps');
 const programmes = require('./routs/programmes');
 const auth = require('./routs/auth');
+const users = require('./routs/users');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/trainingcamps', trainingcamps);
 app.use('/api/v1/programmes', programmes);
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/users', users);
 
 //custom errorHandler
 app.use(errorHandler);

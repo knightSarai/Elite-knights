@@ -4,7 +4,7 @@ const sendEmail = require('../utils/sendemail');
 const User = require('../models/User');
 const crypto = require('crypto');
 
-// @desc   Create user
+// @desc   Register user
 // @route  POST /api/v1/auth/register
 // @access public
 exports.register = asyncHandler(async (req, res, next) => {

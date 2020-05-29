@@ -4,7 +4,6 @@ const Program = require('../models/Program');
 const filteredResults = require('../middleware/filteredResults');
 const router = express.Router({ mergeParams: true });
 const { protect, authorize } = require('../middleware/auth');
-// router.route('/radius/:zipcode/:distance').get(getTrainingcampInRadius);
 
 router
 	.route('/')

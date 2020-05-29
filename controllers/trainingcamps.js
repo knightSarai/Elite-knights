@@ -17,7 +17,7 @@ exports.getTrainingcamps = asyncHandler(async (req, res, next) => {
 exports.getTrainingcamp = asyncHandler(async (req, res, next) => {
 	const trainingcamp = await Trainingcamp.findById(req.params.id);
 	if (!trainingcamp) {
-		return next(new ErrorResponse(`training camp not found with id of ${req.params.id}`));
+		return next(new ErrorResponse(`training camp not found with id of ${req.params.id}`, 404));
 	}
 	res.status(200).json({ success: true, data: trainingcamp });
 });
