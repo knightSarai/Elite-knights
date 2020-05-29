@@ -43,11 +43,15 @@ exports.getProgram = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.addProgram = asyncHandler(async (req, res, next) => {
 	req.body.trainingcamp = req.params.trainingcampId;
-
+	req.body.user = req.user.id;
 	const trainingcamp = await Trainingcamp.findById(req.params.trainingcampId);
 
 	if (!trainingcamp) {
 		return next(new ErrorResponse(`No trainingcamp with the id of ${req.params.trainingcampId}`, 404));
+	}
+	//trainingcamp trainer
+	if (trainingcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+		return next(new ErrorResponse(`User is not autherized to create course to ${req.params.trainingcampId}`), 404);
 	}
 
 	// create new program
@@ -63,10 +67,15 @@ exports.addProgram = asyncHandler(async (req, res, next) => {
 // @route  PUT /api/v1/programmes/:id
 // @access Private
 exports.updateProgram = asyncHandler(async (req, res, next) => {
-	let program = Program.findById(req.params.id);
+	let program = await Program.findById(req.params.id);
+	req.body.user = req.user.id;
 
 	if (!program) {
 		return next(new ErrorResponse(`No Program with the id of ${req.params.id}`), 404);
+	}
+	//Make sure user is program owner
+	if (program.user.toString() !== req.user.id && req.user.role !== 'admin') {
+		return next(new ErrorResponse(`User is not autherized to update course to ${req.params.trainingcampId}`), 404);
 	}
 	program = await Program.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
@@ -83,12 +92,14 @@ exports.updateProgram = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.deleteProgram = asyncHandler(async (req, res, next) => {
 	const program = await Program.findById(req.params.id);
-	console.log(program);
+	req.body.user = req.user.id;
 
 	if (!program) {
 		return next(new ErrorResponse(`No Program with the id of ${req.params.id}`), 404);
 	}
-
+	if (program.user.toString() !== req.user.id && req.user.role !== 'admin') {
+		return next(new ErrorResponse(`User is not autherized to Delete course to ${req.params.trainingcampId}`), 404);
+	}
 	await program.remove();
 
 	res.status(200).json({

@@ -26,6 +26,17 @@ exports.getTrainingcamp = asyncHandler(async (req, res, next) => {
 // @route POST /api/v1/trainingcamps/:id
 // @access Private
 exports.createTrainingcamp = asyncHandler(async (req, res, next) => {
+	// add user to req.body
+	req.body.user = req.user.id;
+
+	//Check for trainingcamp by the owner user
+	const userTrainingcamp = await Trainingcamp.findOne({ user: req.user.id });
+
+	// if the user is not an admin, only one training camp can be added
+	if (userTrainingcamp && req.user.role !== 'admin') {
+		return next(new ErrorResponse(`The trainer has already trainingcamp`), 400);
+	}
+
 	const trainingcamp = await Trainingcamp.create(req.body);
 	res.status(201).json({ success: true, data: trainingcamp });
 });
@@ -34,13 +45,18 @@ exports.createTrainingcamp = asyncHandler(async (req, res, next) => {
 // @route PUT /api/v1/trainingcamps/:id
 // @access Private
 exports.updateTrainingcamp = asyncHandler(async (req, res, next) => {
-	const trainingcamp = await Trainingcamp.findByIdAndUpdate(req.params.id, req.body, {
-		new: true,
-		runValidators: true
-	});
+	let trainingcamp = await Trainingcamp.findById(req.params.id);
 	if (!trainingcamp) {
 		return next(new ErrorResponse(`training camp not found with id of ${req.params.id}`));
 	}
+	// user === training camp owner
+	if (trainingcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+		return next(new ErrorResponse(`User is not autherized to update this training camp`), 404);
+	}
+	trainingcamp = await Trainingcamp.findById(req.params.id, req.body, {
+		new: true,
+		runValidators: true
+	});
 	res.status(200).json({ success: true, data: trainingcamp });
 });
 
@@ -51,6 +67,10 @@ exports.deleteTrainingcamp = asyncHandler(async (req, res, next) => {
 	const trainingcamp = await Trainingcamp.findById(req.params.id);
 	if (!trainingcamp) {
 		return next(new ErrorResponse(`training camp not found with id of ${req.params.id}`));
+	}
+	// user === training camp trainer
+	if (trainingcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+		return next(new ErrorResponse(`User is not autherized to delete this training camp`), 404);
 	}
 	// to trigger on Cascade delete model middleware
 	trainingcamp.remove();
