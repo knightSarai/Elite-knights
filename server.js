@@ -19,6 +19,7 @@ const trainingcamps = require('./routs/trainingcamps');
 const programmes = require('./routs/programmes');
 const auth = require('./routs/auth');
 const users = require('./routs/users');
+const reviews = require('./routs/reviews');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/api/v1/trainingcamps', trainingcamps);
 app.use('/api/v1/programmes', programmes);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/users', users);
+app.use('/api/v1/reviews', reviews);
 
 //custom errorHandler
 app.use(errorHandler);

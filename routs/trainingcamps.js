@@ -13,6 +13,7 @@ const filteredResults = require('../middleware/filteredResults');
 
 // include other resourse router
 const programRouter = require('./programmes');
+const reviewsRouter = require('./reviews');
 
 const router = express.Router();
 
@@ -20,6 +21,8 @@ const { protect, authorize } = require('../middleware/auth');
 
 // Re-rout into other resourse routers
 router.use('/:trainingcampId/programmes', programRouter);
+router.use('/:trainingcampId/reviews', reviewsRouter);
+
 // router.route('/radius/:zipcode/:distance').get(getTrainingcampInRadius);
 
 router.route('/:id/photo').put(protect, authorize('trainer', 'admin'), trainingcampPhotoUpload);

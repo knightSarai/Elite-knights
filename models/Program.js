@@ -71,7 +71,7 @@ ProgramSchema.post('save', function() {
 	this.constructor.getAverageCost(this.trainingcamp);
 });
 
-// Call getAverageCost before remove save
+// Call getAverageCost before remove
 ProgramSchema.pre('save', function() {
 	this.constructor.getAverageCost(this.trainingcamp);
 });
