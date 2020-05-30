@@ -1,0 +1,101 @@
+[
+	{
+		"_id": "5d725a4a7b292f5f8ceff789",
+		"title": "absolute beginner training program",
+		"description": "This program will provide you with all of the essentials to start your sportship journy",
+		"weeks": 8,
+		"tuition": 8000,
+		"minimumSkill": "beginner",
+		"scholarhipsAvailable": true,
+		"trainingcamp": "5d713995b721c3bb38c1f5d0",
+		"user": "5d7a514b5d2c12c7449be045"
+	},
+	{
+		"_id": "5d725c84c4ded7bcb480eaa0",
+		"title": "intermediat training program",
+		"description": "In this program you will learn all type of workouts, and how to implement them in your routine",
+		"weeks": 12,
+		"tuition": 10000,
+		"minimumSkill": "intermediate",
+		"scholarhipsAvailable": true,
+		"trainingcamp": "5d713995b721c3bb38c1f5d0",
+		"user": "5d7a514b5d2c12c7449be045"
+	},
+	{
+		"_id": "5d725cb9c4ded7bcb480eaa1",
+		"title": "the essentials of sport and exercise nutrition",
+		"description": "it's a part of job guarantee training camp, that provide you of all the essintials to become successful trainer",
+		"weeks": 10,
+		"tuition": 12000,
+		"minimumSkill": "intermediate",
+		"scholarhipsAvailable": true,
+		"trainingcamp": "5d713a66ec8f2b88b8f830b8",
+		"user": "5d7a514b5d2c12c7449be046"
+	},
+	{
+		"_id": "5d725cd2c4ded7bcb480eaa2",
+		"title": "strength and conditioning",
+		"description": "it's a part two of job guarantee training camp, that focus on strength an conditioning aspects",
+		"weeks": 12,
+		"tuition": 10000,
+		"minimumSkill": "intermediate",
+		"scholarhipsAvailable": true,
+		"trainingcamp": "5d713a66ec8f2b88b8f830b8",
+		"user": "5d7a514b5d2c12c7449be046"
+	},
+	{
+		"_id": "5d725ce8c4ded7bcb480eaa3",
+		"title": "champoins home",
+		"description": "Get started building the sport ship that you need. We coach you",
+		"weeks": 10,
+		"tuition": 9000,
+		"minimumSkill": "beginner",
+		"scholarhipsAvailable": true,
+		"trainingcamp": "5d725a037b292f5f8ceff787",
+		"user": "5c8a1d5b0190b214360dc031"
+	},
+	{
+		"_id": "5d725cfec4ded7bcb480eaa4",
+		"title": "elite champs home",
+		"description": "boost up your sport level. We coach you",
+		"weeks": 10,
+		"tuition": 12000,
+		"minimumSkill": "intermediate",
+		"scholarhipsAvailable": false,
+		"trainingcamp": "5d725a037b292f5f8ceff787",
+		"user": "5c8a1d5b0190b214360dc031"
+	},
+	{
+		"_id": "5d725cfec4ded7bcb480eaa5",
+		"title": "physical therapy phase one",
+		"description": "learn to diagnose and treat individuals of all ages, from newborns to the very oldest, who have medical problems or other health-related conditions that limit their abilities to move and perform functional activities in their daily lives",
+		"weeks": 8,
+		"tuition": 8000,
+		"minimumSkill": "beginner",
+		"scholarhipsAvailable": false,
+		"trainingcamp": "5d725a1b7b292f5f8ceff788",
+		"user": "5c8a1d5b0190b214360dc032"
+	},
+	{
+		"_id": "5d725cfec4ded7bcb480eaa6",
+		"title": "physical therapy phase two",
+		"description": "a customized outpatient program of exercise and education. Cardiac rehabilitation is designed to help you improve your health and help you recover from a heart attack, other forms of heart disease or surgery to treat heart disease.",
+		"weeks": 6,
+		"tuition": 5000,
+		"minimumSkill": "intermediate",
+		"scholarhipsAvailable": false,
+		"trainingcamp": "5d725a1b7b292f5f8ceff788",
+		"user": "5c8a1d5b0190b214360dc032"
+	},
+	{
+		"_id": "5d725cfec4ded7bcb480eaa7",
+		"title": "Vestibular rehabilitation therapy",
+		"description": "is an exercise-based treatment program designed to promote vestibular adaptation and substitution.",
+		"weeks": 8,
+		"tuition": 6000,
+		"minimumSkill": "intermediate",
+		"scholarhipsAvailable": false,
+		"trainingcamp": "5d725a1b7b292f5f8ceff788",
+		"user": "5c8a1d5b0190b214360dc032"
+	}
+]

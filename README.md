@@ -16,6 +16,16 @@ npm run dev
 # Run in prod mode
 npm start
 ```
+## DataBase seeder
+> to seed the database with user, trainingcamp, program, review from "_data" folder
+```
+# Destroy all data
+node seeder -d
 
+# Import all data
+node seeder -i
+
+```
+Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own.
 - Version: 1.0.0
 - License: MIT
